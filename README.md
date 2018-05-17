@@ -1,14 +1,26 @@
-# pantry
+Pantry is a inventory app for your home, it contains a local database of your  recipes, ingredients, and utensils/tools
 
-A Clojure library designed to ... well, that part is up to you.
+Pantry requires
 
-## Usage
+re-natal https://github.com/drapanjanas/re-natal  
+react-native https://facebook.github.io/react-native/  
+lein https://leiningen.org/
 
-FIXME
+Recommend rlwrap
 
-## License
+`npm install react-native-local-mongo --save`  
+`npm install react-navigation --save`
 
-Copyright © 2018 FIXME
+To run in development mode
+* in the project directory run `npm install` download the internet
+* run `re-natal enable-auto-require` to make sure it picks up all required react components
+* start an android emulator of your choice
+* start react native `react-native start`
+* run this command to launch lein and compile the project  
+    - `lein clean; re-natal use-android-device avd; re-natal use-figwheel; rlwrap lein figwheel android`
+* run `react-native run-android` to side load the app into the emulator
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+
+Pantry is still a work in progress 
+
+Please see licensing file for licensing information. License subject to future changes.
