@@ -1,23 +1,24 @@
 (ns pantry.components.core-view
   (:require [reagent.core :as r :refer [atom]]
+            [pantry.react-requires :refer [Platform Image Button TouchableOpacity InteractionManager View ScrollView Text TouchableHighlight]]
             [re-frame.core :refer [subscribe dispatch dispatch-sync]]
-            [cljs-react-navigation.reagent :refer [stack-screen]]
+            ; [cljs-react-navigation.reagent :refer [stack-navigator stack-screen router] :as rnav]
             [pantry.events]
             [pantry.components.navigator :as nav]
-            [pantry.screens.list :as li]
+            [pantry.screens.components :as comps]
             [pantry.model_specs :as ms]
             [pantry.subs]))
 
-(defn build-routing-map
-  []
-  {:Recipes {:screen (stack-screen #(li/display-list li/example-model) {:title "Recipes"})}
-   :Ingredients {:screen (stack-screen #(li/display-list li/example-model) {:title "Ingredients"})}
-   :Meals {:screen (stack-screen #(li/display-list li/example-model) {:title "Meals"})}
-   :Utensils {:screen (stack-screen #(li/display-list li/example-model) {:title "Utensils"})}})
+(def ReactNative (js/require "react-native"))
 
 (defn app-root
   [& args]
-  ; (fn [] (li/list-item (clj->js li/example-list))))
-  (fn [args] (this-as this
-              (nav/get-component {:routing-map (build-routing-map)
-                                  :this this}))))
+  (let [nav-state (subscribe [:nav-state])]
+    (r/create-class                 ;; <-- expects a map of functions 
+      {:component-did-mount               ;; the name of a lifecycle function
+      #(println "component-did-mount")   ;; your implementation
+      :component-will-mount              ;; the name of a lifecycle function
+      #(println "component-will-mount")  ;; your implementation
+      ;; other lifecycle funcs can go in here
+      :display-name  "pantry"  ;; for more helpful warnings & errors
+      :reagent-render (fn [] [(this-as this (r/adapt-react-class (nav/build-navigator this)))])})))

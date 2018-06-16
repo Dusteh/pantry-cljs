@@ -6,9 +6,13 @@
 (def MongoDB (js/require "react-native-local-mongodb"))
 
 (def mongo-collections 
-  {:recipes {:database (new MongoDB {:filename "recipe-db" :autoload true})
+  {:recipes {:database (new MongoDB (clj->js {:filename "recipe-db" :autoload true}))
              :validator :recipe/model}
-   :ingredients {:database (new MongoDB {:filename "ingredient-db" :autoload true})
+   :meals {:database (new MongoDB (clj->js {:filename "meal-db" :autoload true}))
+           :validator :meal/model}
+   :utensils {:database (new MongoDB (clj->js {:filename "utensil-db" :autoload true}))
+              :validator :utensil/model}
+   :ingredients {:database (new MongoDB (clj->js {:filename "ingredient-db" :autoload true}))
                  :validator :ingredient/model}})
 
 (defn run-validate
@@ -25,26 +29,26 @@
 (defn insert
   [collection document actor-function]
   (let [coll (get-collection collection)]
-    (run-validate (:validator coll) document)
+    ; (run-validate (:validator coll) document)
     (.insert (:database coll) 
              (clj->js document) 
              actor-function)))
 
 (defn update
   [collection document actor-function]
-  (.update (get-collection collection) 
+  (.update (:database (get-collection collection))
            (clj->js document) 
            actor-function))
 
 (defn find
   [collection clause actor-function]
-  (.find (get-collection collection)
+  (.find (:database (get-collection collection))
          (clj->js clause)
          actor-function))
 
 (defn find-one
   [collection clause actor-function]
-  (.findOne (get-collection collection)
+  (.findOne (:database (get-collection collection))
             (clj->js clause)
             actor-function))
 
@@ -60,4 +64,4 @@
   []
   (let [rslt-chan (as/chan)
         _ (as/go (println ::as-go-println (as/<! rslt-chan)))]
-  (insert :recipes {:name "Chicken Pie"} (fn [err doc] (as/go (as/<! doc))))))
+  (insert :recipes {:name "Chicken Pie"} (fn [err doc] (println doc) (as/go (as/<! doc))))))
