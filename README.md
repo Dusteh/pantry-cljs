@@ -8,7 +8,7 @@ lein https://leiningen.org/
 
 Recommend rlwrap
 
-`npm install react-native-local-mongo --save`  
+`npm install react-native-local-mongodb --save`  
 `npm install react-navigation --save`
 
 To run in development mode
