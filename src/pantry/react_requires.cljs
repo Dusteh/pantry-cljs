@@ -51,6 +51,14 @@
 (def DrawerNav (.-createDrawerNavigator ReactNavigation))
 (def StackScreen (.-StackScreen ReactNavigation))
 
+; react-native-popup-menu
+(defonce ReactNativePopupMenu (js/require "react-native-popup-menu"))
+(defonce MenuProvider (.-MenuProvider ReactNativePopupMenu))
+(defonce Menu (.-Menu ReactNativePopupMenu))
+(defonce MenuOptions (.-MenuOptions ReactNativePopupMenu))
+(defonce MenuOption (.-MenuOption ReactNativePopupMenu))
+(defonce MenuTrigger (.-MenuTrigger ReactNativePopupMenu))
+
 (defn log 
   [msg]
   (.log js/console msg))

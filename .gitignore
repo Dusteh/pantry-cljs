@@ -73,3 +73,8 @@ figwheel_server.log
 .lein-repl-history
 .vscode/
 .watchmanconfig
+
+# vim
+*.swp
+*.swo
+*~
