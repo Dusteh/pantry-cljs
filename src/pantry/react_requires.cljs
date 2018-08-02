@@ -1,4 +1,6 @@
-(ns pantry.react-requires)
+(ns pantry.react-requires
+  (:require [reagent.core :as r]))
+  
 
     ; react-native
 (set! js/ReactNative (js/require "react-native"))
@@ -54,10 +56,14 @@
 ; react-native-popup-menu
 (defonce ReactNativePopupMenu (js/require "react-native-popup-menu"))
 (defonce MenuProvider (.-MenuProvider ReactNativePopupMenu))
-(defonce Menu (.-Menu ReactNativePopupMenu))
-(defonce MenuOptions (.-MenuOptions ReactNativePopupMenu))
-(defonce MenuOption (.-MenuOption ReactNativePopupMenu))
-(defonce MenuTrigger (.-MenuTrigger ReactNativePopupMenu))
+(defonce Menu (r/adapt-react-class (.-Menu ReactNativePopupMenu)))
+(defonce MenuOptions (r/adapt-react-class (.-MenuOptions ReactNativePopupMenu)))
+(defonce MenuOption (r/adapt-react-class (.-MenuOption ReactNativePopupMenu)))
+(defonce MenuTrigger (r/adapt-react-class (.-MenuTrigger ReactNativePopupMenu)))
+
+; react-native-popup-dialog
+(defonce ReactNativePopupDialog (js/require "react-native_popup-dialog"))
+(defonce PopupDialog (.-PopupDialog ReactNativePopupDialog))
 
 (defn log 
   [msg]

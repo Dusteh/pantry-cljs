@@ -2,6 +2,7 @@
     (:require [reagent.core :as r :refer [atom]]
               [re-frame.core :refer [subscribe dispatch dispatch-sync]]
               [pantry.react-requires :refer [Platform 
+                                             Alert
                                              Image 
                                              Button 
                                              TouchableOpacity 
@@ -23,7 +24,7 @@
      {"avatar-url" "https://pbs.twimg.com/profile_images/423527243554365440/4V3jhw7N_400x400.jpeg"
       "title" "Test"
     ;   "key" "some random number" 
-      "onclick" (fn [] (.alert (.-Alert ReactNative) "Shows item detail screen"))
+      "onclick" (fn [])
       "name" "Dustin Hittenmiller"}))
 
 (defn result-handler
@@ -44,7 +45,7 @@
         (when (not (coll? prvdr)) (prvdr {} rslt-handler));;Dispatches in the prvdr call if it's not a raw collection
         (fn [args]
             [:> FlatList {:data @list-atm
-                        :renderItem (fn [itm] 
+                          :renderItem (fn [itm] 
                                         (let [pr-itm (get (js->clj itm) "item")
                                               indx (get (js->clj itm) "index")
                                               url (get pr-itm "avatar-url")
@@ -53,14 +54,14 @@
                                               onclick #(click this (assoc props :itm itm
                                                                                 :model model))
                                               name (get pr-itm "name")]
-                                        (r/as-element
-                                                [:> TouchableHighlight {:key indx
-                                                                        :on-press onclick
-                                                                        :underlay-color "#dddd"}
-                                                    [:> View {:style {:flex-direction "row" 
-                                                                :align-items "flex-start"}}
-                                                        [:> Image {:source {:uri url}
-                                                                   :style {:width 50 :height 50}}]
-                                                        [:> View {:style {:flex-direction "column" :marginLeft 20}}
-                                                            [:> Text {:style {:font-size 16}} name]
-                                                            [:> Text {:style {:font-size 12}} title]]]])))}])))
+                                          (r/as-element
+                                                  [:> TouchableHighlight {:key indx
+                                                                          :on-press onclick
+                                                                          :underlay-color "#dddd"}
+                                                      [:> View {:style {:flex-direction "row"} 
+                                                                :align-items "flex-start"}
+                                                          [:> Image {:source {:uri url}
+                                                                     :style {:width 50 :height 50}}]
+                                                          [:> View {:style {:flex-direction "column" :marginLeft 20}}
+                                                              [:> Text {:style {:font-size 16}} name]
+                                                              [:> Text {:style {:font-size 12}} title]]]])))}])))

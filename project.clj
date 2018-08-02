@@ -4,12 +4,12 @@
             :license {:name "Eclipse Public License"
                       :url  "http://www.eclipse.org/legal/epl-v10.html"}
             :dependencies [[org.clojure/clojure "1.9.0"]
-                           [org.clojure/clojurescript "1.9.946"]
+                           [org.clojure/clojurescript "1.10.339"]
                            [com.stuartsierra/component "0.3.2"]
                            [org.clojure/core.async "0.4.474"]
                            [cljs-react-navigation "0.1.3"]
                            [com.andrewmcveigh/cljs-time "0.5.2"]
-                           [reagent "0.7.0" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server cljsjs/create-react-class]]
+                           [reagent "0.8.1" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server cljsjs/create-react-class]]
                            [re-frame "0.10.4"]]
             :plugins [[lein-cljsbuild "1.1.4"]
                       [lein-figwheel "0.5.14"]]
@@ -38,9 +38,9 @@
                                                       :compiler     {:output-to     "target/android/not-used.js"
                                                                      :main          "env.android.main"
                                                                      :output-dir    "target/android"
-                                                                     :optimizations :none}}
-#_($DEV_PROFILES$)]}
-                             :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}
+                                                                     :optimizations :none}}]}}})
+#_($DEV_PROFILES$
+                             :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
                        :prod {:cljsbuild {:builds [
                                                    {:id           "ios"
                                                     :source-paths ["src" "env/prod"]
@@ -59,10 +59,10 @@
                                                                    :static-fns    true
                                                                    :optimize-constants true
                                                                    :optimizations :simple
-                                                                   :closure-defines {"goog.DEBUG" false}}}
-#_($PROD_PROFILES$)]}}
+                                                                   :closure-defines {"goog.DEBUG" false}}}]}})
+#_($PROD_PROFILES$
                        :advanced {:dependencies [[react-native-externs "0.1.0"]]
-                                  :cljsbuild {:builds [
+                                  :cljsbuild {:builds []
                                                    {:id           "ios"
                                                     :source-paths ["src" "env/prod"]
                                                     :compiler     {:output-to     "index.ios.js"
@@ -80,5 +80,5 @@
                                                                    :static-fns    true
                                                                    :optimize-constants true
                                                                    :optimizations :advanced
-                                                                   :closure-defines {"goog.DEBUG" false}}}
-#_($ADVANCED_PROFILES$)]}}})
+                                                                   :closure-defines {"goog.DEBUG" false}}}}})
+#_($ADVANCED_PROFILES$)

@@ -22,7 +22,6 @@
     [msg]
     (.alert Alert msg))
 
-(def hamburger (js/require "./images/hamburger.png"))
 
 (defn nav-wrapper 
   [component title this]
@@ -46,15 +45,6 @@
                 :size 30
                 :color "black"
                 :style {:margin-left 10 :margin-top 5}}]]))
-
-(defn back-btn
-  [navigation]
-  (fn [] 
-    [:> TouchableHighlight {:underlay-color "#ddd"
-                            :on-press (fn [] (let [nav-dispatch (get navigation "dispatch")]
-                                                  (nav-dispatch (.toggleDrawer DrawerActions))))}
-      [:> Image {:source hamburger
-                 :style {:margin-left 10 :margin-top 5 :width 30 :height 30}}]]))
 
 (defn action-button
     []

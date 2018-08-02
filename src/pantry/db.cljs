@@ -37,7 +37,9 @@
 (defn update
   [collection document actor-function]
   (.update (:database (get-collection collection))
-           (clj->js document) 
+           (clj->js {"_id" (get document "_id")})
+           (clj->js (dissoc document "onclick"))
+           (clj->js {"returnUpdatedDocs" true})
            actor-function))
 
 (defn find

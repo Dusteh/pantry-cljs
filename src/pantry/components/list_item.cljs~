@@ -2,6 +2,7 @@
     (:require [reagent.core :as r :refer [atom]]
               [re-frame.core :refer [subscribe dispatch dispatch-sync]]
               [pantry.react-requires :refer [Platform 
+                                             Alert
                                              Image 
                                              Button 
                                              TouchableOpacity 
@@ -23,7 +24,7 @@
      {"avatar-url" "https://pbs.twimg.com/profile_images/423527243554365440/4V3jhw7N_400x400.jpeg"
       "title" "Test"
     ;   "key" "some random number" 
-      "onclick" (fn [] (.alert (.-Alert ReactNative) "Shows item detail screen"))
+      "onclick" (fn [])
       "name" "Dustin Hittenmiller"}))
 
 (defn result-handler
@@ -52,15 +53,15 @@
                                               click (get pr-itm "onclick")
                                               onclick #(click this (assoc props :itm itm
                                                                                 :model model))
-                                              name (get pr-itm "name")])
-                                        (r/as-element
-                                                [:> TouchableHighlight {:key indx
-                                                                        :on-press onclick
-                                                                        :underlay-color "#dddd"}
-                                                    [:> View {:style {:flex-direction "row"} 
+                                              name (get pr-itm "name")]
+                                          (r/as-element
+                                                  [:> TouchableHighlight {:key indx
+                                                                          :on-press onclick
+                                                                          :underlay-color "#dddd"}
+                                                      [:> View {:style {:flex-direction "row"} 
                                                                 :align-items "flex-start"}
-                                                        [:> Image {:source {:uri url}
-                                                                   :style {:width 50 :height 50}}]
-                                                        [:> View {:style {:flex-direction "column" :marginLeft 20}}
-                                                            [:> Text {:style {:font-size 16}} name]
-                                                            [:> Text {:style {:font-size 12}} title]]]]))}])))
+                                                          [:> Image {:source {:uri url}
+                                                                     :style {:width 50 :height 50}}]
+                                                          [:> View {:style {:flex-direction "column" :marginLeft 20}}
+                                                              [:> Text {:style {:font-size 16}} name]
+                                                              [:> Text {:style {:font-size 12}} title]]]])))}])))
