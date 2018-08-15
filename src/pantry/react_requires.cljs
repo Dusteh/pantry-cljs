@@ -62,8 +62,8 @@
 (defonce MenuTrigger (r/adapt-react-class (.-MenuTrigger ReactNativePopupMenu)))
 
 ; react-native-popup-dialog
-(defonce ReactNativePopupDialog (js/require "react-native_popup-dialog"))
-(defonce PopupDialog (.-PopupDialog ReactNativePopupDialog))
+(defonce ReactNativePopupDialog (js/require "react-native-popup-dialog"))
+(defonce PopupDialog (.-default ReactNativePopupDialog))
 
 (defn log 
   [msg]

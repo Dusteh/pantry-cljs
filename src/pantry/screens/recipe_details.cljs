@@ -21,7 +21,9 @@
                                            Menu
                                            MenuTrigger
                                            MenuOptions
+                                           ReactNativePopupDialog
                                            MenuOption
+                                           PopupDialog
                                            log
                                            TouchableHighlight]]
             [pantry.db :as db]
@@ -56,6 +58,7 @@
 (defn img-modal
   [itm]
   (let [img-state-atm (r/atom false)]
+    (println ::popupDialog? PopupDialog)
     (r/create-class
        {:reagent-render
         (fn []
@@ -77,9 +80,18 @@
                                    :height 320
                                    :width "100%"}}]]]]])})))
 
+(defn ingredient-popup 
+  [this item]
+  (fn []
+    [:> PopupDialog {:ref (fn [popup] (aset this "popup" popup))}]))
+    
+  
+  
+
 (defn add-ingredient
-  [itm]
+  [itm this]
   (let [add-itm-modal (atom false)]
+    (println ReactNativePopupDialog)
     (fn []
       [:> View
 ;       [:> Modal {:animation-type "fade"
@@ -97,8 +109,7 @@
 ;                            :border-right-width 1
 ;                            :background-color "white"}}
 ;           [:> Text "Hello"]]]
-           
-            
+       [ingredient-popup this itm] 
        [:> View {:style {:flex-direction "row"}}
             [:> Text {:style {:font-size 10
                               :margin-bottom 5
@@ -106,6 +117,8 @@
                               :margin-left 5}} "Ingredients"]
             [:> View {:style {:flex-direction "row" :justify-content "center" :align-items "center"}}
               [:> TouchableHighlight {:on-press (fn [] 
+                                                  (println "Clicked")
+                                                  (println (pr-str (js-keys this)))
                                                   (reset! add-itm-modal true))
                                       :underlay-color "#dddd"}
                [:> Icon {:name "library-add" :color "black" :size 15}]]]
@@ -205,6 +218,6 @@
            [img-modal itm-atm]]
         [:> ScrollView {:style {:margin-top 5
                                 :height "48%"}}
-          [add-ingredient itm-atm]
+          [add-ingredient itm-atm this]
           [directions-textbox props itm-atm]]
         [save-cancel-btns props itm-atm]])))
