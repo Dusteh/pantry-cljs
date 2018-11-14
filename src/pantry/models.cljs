@@ -29,6 +29,9 @@
              "name" (get itm "name")}
             itm))))
             
+(defn generic-new-instance
+  [this model]
+  (println :generic-new model))
 
 (defn generic-parser
     [doc props]
@@ -50,7 +53,7 @@
 (def recipe 
   {:title "Recipes"
    :data-provider #(generic-provider :recipes %1 %2)
-   :new-instance {}
+   :new-instance  #(generic-new-instance %1 %2)
    :detail-view rd/recipe-details 
    :spec :recipe/model 
    :parser #(generic-parser %1 %2)})

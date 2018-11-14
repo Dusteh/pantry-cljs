@@ -47,16 +47,18 @@
                 :style {:margin-left 10 :margin-top 5}}]]))
 
 (defn action-button
-    []
-    (fn [args]
+    [this model]
+    (fn [this args]
         [:> View {:style {:flex-direction "row"
                           :position "absolute"
-                          :top "90%"
-                          :left "85%"}}
+                          :top "85%"
+                          :left "80%"}}
             [:> TouchableHighlight {:underlay-color "#dddd"
-                                    :on-press (fn [] (alert "Shows action buttons"))}
-                [:> Image {:source hamburger
-                           :style {:width 30 :height 30 :z-index 10}}]]]))
+                                    :on-press #((:new-instance model) this model)}
+                [:> Icon  {:name "add-circle"
+                           :size 60
+                           :color "red"
+                           :style {:z-index 10}}]]]))
 
 
 (defn get-rn-el
@@ -86,7 +88,7 @@
             [:> View {:style {:flex-direction "column"}}
                 [:> View {:style {:width "100%" :height "100%"}}
                     [li/list-item model this props]]
-                [action-button]])))
+                [action-button this model]])))
 
 (defn model-screen
     [this model title]

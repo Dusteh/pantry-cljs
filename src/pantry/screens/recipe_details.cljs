@@ -41,7 +41,6 @@
                 (println ::result-fn err numAffected affectedDocuments upsert)))
   (cancel props))
   
-
 (defn edit-img-btn
   [base-elm]
   (fn [props]
