@@ -10,6 +10,8 @@ Recommend rlwrap
 
 `npm install react-native-local-mongodb --save`  
 `npm install react-navigation --save`
+`npm install --save react-native-vector-icons`
+`npm install --save react-native-popup-menu`
 
 To run in development mode
 * in the project directory run `npm install` download the internet
