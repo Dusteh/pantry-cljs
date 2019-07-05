@@ -12,6 +12,8 @@ Recommend rlwrap
 `npm install react-navigation --save`
 `npm install --save react-native-vector-icons`
 `npm install --save react-native-popup-menu`
+`npm install --save react-native-popup-dialog`
+`npm install --save react-native-gesture-handler`
 
 To run in development mode
 * in the project directory run `npm install` download the internet
