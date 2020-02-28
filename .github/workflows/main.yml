@@ -15,4 +15,4 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
-        git rev-list --left-right --count origin/master...origin/dependabot/npm_and_yarn/handlebars-4.5.3
+        git rev-list --left-right --count origin/master...origin/Dusteh-patch-1
