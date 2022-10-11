@@ -11,7 +11,7 @@
     "babel-plugin-transform-es2015-block-scoping": "6.15.0",
     "eslint": "^4.0.0",
     "react": "^16.4.1",
-    "react-native": "^0.55.4",
+    "react-native": "^0.70.2",
     "react-native-action-button": "^2.8.4",
     "react-native-elements": "^0.19.1",
     "react-native-local-mongodb": "^2.2.2",
